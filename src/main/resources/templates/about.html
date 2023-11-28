@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>About Us</title>
+    <link rel="stylesheet" type="text/css" media="all" href="../static/styles/reg_auth.css" th:href="@{/styles/reg_auth.css}">
+</head>
+<body>
+
+<div class="top-bar">
+    <a class="top-left-link" th:href="@{/inpr}">Главная</a>
+    <a class="top-right-link" th:if="${authentication.name == 'anonymousUser'}" th:href="@{/auth}">Авторизация</a>
+    <a class="top-right-link2" th:if="${authentication.name == 'anonymousUser'}" th:href="@{/registr}">Регистрация</a>
+    <form class="top-right-link" th:if="${authentication.name != 'anonymousUser'}" th:action="@{/logout}" method="post">
+        <input type="submit" value="Logout">
+    </form>
+</div>
+
+<h1 class="title">О нас</h1>
+
+<h3 class="textabout">Хороший магазин</h3>
+
+</body>
+</html>

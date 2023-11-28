@@ -1,0 +1,118 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+}
+body {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    background-color: #1f2029;
+}
+
+.top-bar {
+    position: relative;
+    background-color: #2b2e38;
+    height: 50px;
+}
+.top-input{
+    margin-top: 30px;
+}
+
+.top-left-link {
+    font-size: 20px;
+    color: #ffd6a8;
+    position: absolute;
+    top: 15px;
+    left: 30px;
+}
+.top-right-link {
+    font-size: 20px;
+    position: absolute;
+    color: #ffd6a8;
+    top: 15px;
+    right: 30px;
+}
+.top-right-link2 {
+    font-size: 20px;
+    position: absolute;
+    color: #ffd6a8;
+    top: 15px;
+    right: 180px;
+}
+
+.title{
+    color: #fffbc9;
+    text-align: center;
+    margin-top: 20px;
+    font-family: Herculanum,serif;
+}
+.textabout {
+    color: #fffbc9;
+    text-align: center;
+    margin-top: 70px;
+    font-family: Herculanum, serif;
+}
+.form {
+    margin-top: 200px;
+    max-width: 430px;
+    padding: 25px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 10px;
+    border: none;
+    background-color: #2b2e38;
+}
+
+.input {
+    display: block;
+    width: 100%;
+    padding: 12px 10px;
+    margin-bottom: 10px;
+    border: 0;
+    border-radius: 15px;
+    font-family: inherit;
+    font-size: 16px;
+    background-color: #1f2029;
+    outline: none;
+    color: #d6cedb;
+}
+.input:hover{
+    background-color: #d6cedb;
+    color: #1f2029;
+}
+.btn{
+    margin-top: 30px;
+    display: block;
+    width: 50%;
+    padding: 10px;
+    border: 0;
+    background-color: #ffd6a8;
+    cursor: pointer;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: inherit;
+    font-size: 16px;
+    color: #1f2029;
+}
+
+.h1{
+    text-align: center;
+    color: #fffbc1;
+}
+
+.btn:hover {
+    background-color: #050910;
+    color: #fffbc9;
+    box-shadow: 0 8px 24px 0 rgba(16,39,112,.2);
+}
+/*.error-message {*/
+/*    color: #f44336; !* Красный цвет текста для сообщения об ошибке *!*/
+/*}*/
+.alert {
+    background-color: #f44336;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+

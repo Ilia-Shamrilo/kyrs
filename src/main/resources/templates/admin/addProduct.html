@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Product</title>
+    <link rel="stylesheet" type="text/css" media="all" href="../static/styles/addProduct.css" th:href="@{/styles/addProduct.css}">
+</head>
+<body>
+
+<form th:action="@{/add-product}" method="post" th:object="${product}" enctype="multipart/form-data">
+    <h2>Добавление товара</h2>
+
+    <!-- Добавьте поля для ввода данных о товаре -->
+    <label>Название: <input type="text" th:field="*{name}" required/></label><br/>
+    <label>Описание: <textarea th:field="*{description}" required></textarea></label><br/>
+    <label>Цена: <input type="number" th:field="*{price}" required/></label><br/>
+    <label>Фотки: <input type="file" name="images" accept="image/*" multiple></label>
+    <label>Категория:
+        <select th:field="*{categories}" required>
+            <option th:each="category : ${T(com.example.webserviceindastrialproduct.models.Category).values()}"
+                    th:value="${category}" th:text="${category}"></option>
+        </select>
+    </label><br/>
+    <!-- Другие поля товара, если необходимо -->
+    <button type="submit">Добавить</button>
+
+</form>
+</body>
+</html>

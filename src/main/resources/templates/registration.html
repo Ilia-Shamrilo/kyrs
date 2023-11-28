@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>InnovateInProducts</title>
+    <link rel="stylesheet" type="text/css" href="../static/styles/reg_auth.css" th:href="@{/styles/reg_auth.css}">
+</head>
+
+<body>
+<div class="top-bar">
+    <a class="top-left-link" th:href="@{/inpr}">Главная</a>
+    <a class="top-right-link" th:href="@{/auth}">Авторизация</a>
+</div>
+
+<h1 class="title">InnovateInProducts</h1>
+<form class="form" th:action= "@{/registr}" th:object="${user}" th:method="post">
+    <h1 class="h1">Регистрация</h1>
+    <div class="top-input">
+        <input class="input" type="text" th:field="*{name}" id="name" required placeholder="Ваше имя">
+        <input class="input" type="tel"  th:field="*{number}" id="number" required placeholder="Ваш телефон">
+        <input class="input" type="password" th:field="*{password}" id="password" required placeholder="Пароль">
+        <input class="input" type="password" name="repeatPassword" required placeholder="Пароль еще раз">
+        <div id="error-message" th:if="${errorMessage}" class="alert" role="alert">
+            <p th:text="${errorMessage}"></p>
+        </div>
+        <button class="btn" type="submit">Зарегистрироваться</button>
+    </div>
+</form>
+</body>
+</html>
