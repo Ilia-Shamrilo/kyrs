@@ -28,6 +28,7 @@ public class AdminController {
     }
     @PostMapping("/add-product")
     public String saveProduct(@ModelAttribute("product") Product product,
+                              @RequestParam("characteristics") String characteristics,
                               @RequestParam(value = "images", required = false) MultipartFile[] files){
         List<String> photos = new ArrayList<>();
         for (MultipartFile file: files){
@@ -42,6 +43,8 @@ public class AdminController {
                 }
             }
         }
+        List<String> characteristicsOfProduct = List.of(characteristics.split(","));
+        product.setCharacteristics(characteristicsOfProduct);
         product.setPhotos(photos);
         productService.addProduct(product);
         return "redirect:/add-product";

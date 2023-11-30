@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>InfoProduct</title>
+    <link rel="stylesheet" type="text/css" media="all" href="../static/styles/reg_auth.css" th:href="@{/styles/reg_auth.css}">
+    <link rel="stylesheet" type="text/css" media="all" href="../static/styles/home.css" th:href="@{/styles/home.css}">
+    <link rel="stylesheet" type="text/css" media="all" href="../static/styles/product.css" th:href="@{/styles/product.css}">
+
+
+</head>
+<body>
+<div class="top-bar">
+    <a class="top-left-link" th:href="@{/inpr}">Главная</a>
+    <!-- Отображаем только если пользователь не авторизован -->
+    <a class="top-right-link" th:if="${authentication.name == 'anonymousUser'}" th:href="@{/auth}">Авторизация</a>
+    <a class="top-right-link2" th:if="${authentication.name == 'anonymousUser'}" th:href="@{/registr}">Регистрация</a>
+    <!-- Отображаем только если пользователь авторизован -->
+    <form th:if="${authentication.name != 'anonymousUser'}" th:action="@{/logout}" method="post">
+        <input class="btn-logout" type="submit" value="Выйти">
+    </form>
+    <form th:if="${roles.contains('USER')}" th:action="@{/basket}" method="get">
+        <input class="btn-add-pr" type="submit" value="Корзина">
+    </form>
+    <form th:if="${roles.contains('USER')}" th:action="@{/profile}" method="get">
+        <input class="btn-profile" type="submit" value="Профиль">
+    </form>
+    <form th:if="${roles.contains('ADMIN')}" th:action="@{/add-product}" method="get">
+        <input class="btn-add-pr" type="submit" value="Добавить продукт">
+    </form>
+</div>
+<div class="in-product-container">
+    <div class="image-center">
+        <img class="image-in-product" th:src="@{'/images/' + ${product.photos.get(0)}}" alt="Product Image">
+    </div>
+    <div class="product">
+            <div class="product-details">
+            <h3 class="name-product" th:text="${product.name}"></h3>
+            <p class="description-product" th:text="${product.description}"></p>
+            <p>Характеристики:</p>
+            <ul>
+                <li th:each="character : ${product.characteristics}">
+                    <p th:text="${character}"></p>
+                </li>
+            </ul>
+            <div class="price-and-button">
+                <p class="price-product" th:text="${product.price}+'р.'"></p>
+                <form th:if="${not roles.contains('ADMIN')}" th:action="@{/add-to-basket}" method="post">
+                    <input type="hidden" name="productId" th:value="${product.id}">
+                    <button class="btn-add-to-basket" type="submit">Поместить в корзину</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

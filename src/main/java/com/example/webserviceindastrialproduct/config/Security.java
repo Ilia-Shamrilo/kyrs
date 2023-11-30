@@ -20,7 +20,7 @@ public class Security{
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests((request) -> request
-                        .requestMatchers("/inpr/**", "/about/**").permitAll()
+                        .requestMatchers("/inpr/**", "/about/**","/images/**","/basket/**","/product/**").permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers("/registr","/styles/**")
                         .permitAll().anyRequest().authenticated())

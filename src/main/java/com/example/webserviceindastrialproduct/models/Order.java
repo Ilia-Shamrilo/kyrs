@@ -16,20 +16,18 @@ import java.util.List;
 @Setter
 @Table(name = "orders")
 public class Order {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @CreationTimestamp//дата создания сразу будет записываться
+    @CreationTimestamp
     private LocalDateTime created;
-    @UpdateTimestamp//во воремя обновления менять дату
+    @UpdateTimestamp
     private LocalDateTime update;
-    @ManyToOne//множество заказов к одному пользователю
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
-    private double sum;
-    @OneToMany(cascade = CascadeType.ALL)//у одного заказа может быть много деталей
-    private List<OrderDetails> details;
-    @Enumerated(EnumType.STRING)
-    private OrderStatus status;
+    @OneToOne
+    private Product product;
+    private int amountOfProduct;
+    private String status;
 }

@@ -1,9 +1,5 @@
-.product-container {
-    max-width: 900px;
-    margin: 100px auto;
-}
 .btn-logout{
-    font-size: 18px;
+    font-size: 20px;
     position: absolute;
     background-color: #ffd6a8;
     top: 15px;
@@ -12,10 +8,10 @@
     border: 0;
     cursor: pointer;
     color: #1f2029;
-    border-radius: 20px;
+    border-radius: 10px;
 }
-.btn-add-pr{
-    font-size: 18px;
+.btn-add-pr {
+    font-size: 20px;
     position: absolute;
     background-color: #ffd6a8;
     top: 15px;
@@ -24,11 +20,64 @@
     border: 0;
     cursor: pointer;
     color: #1f2029;
-    border-radius: 20px;
+    border-radius: 10px;
+}
+.btn-profile{
+    font-size: 20px;
+    position: absolute;
+    background-color: #ffd6a8;
+    top: 15px;
+    right: 240px;
+    display: block;
+    border: 0;
+    cursor: pointer;
+    color: #1f2029;
+    border-radius: 10px;
+}
+.find{
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 50px;
+    text-align: center;
+}
+.find-select {
+    width: 300px;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 15px;
+    margin-right: 10px;
+    outline: none;
 }
 
+.find-btn {
+    width: 150px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #ffd6a8;
+    color: #1f2029;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+.find-btn:hover {
+    background-color: #e8c195;
+}
+.product-container {
+    max-width: 900px;
+    margin: 40px auto;
+}
+.product-link{
+    text-decoration: none;
+    color: inherit;
+}
+.product-link:hover{
+    text-decoration: none;
+}
 .product {
-    color: #ffffff;
+    color: #cccccc;
+    background-color: rgba(80, 99, 154, 0.49);
     border: 1px solid #1e3238;
     border-radius: 20px;
     padding: 10px;
@@ -38,8 +87,10 @@
 }
 
 .image-product {
-    width: 150px;
-    height: 150px;
+    width: 250px;
+    height: 300px;
+    min-width: 250px;
+    min-height: 250px;
     margin-right: 10px;
 }
 
@@ -51,7 +102,6 @@
 }
 
 .name-product {
-    color: #f4f4f4;
     font-size: 18px;
     margin-bottom: 5px;
     text-align: center;
@@ -69,19 +119,22 @@
 }
 
 .price-product {
+    font-size: 30px;
     font-weight: bold;
     text-align: left;
+    color: #ff0000;
 }
 
-.btn-add-to-bucket {
-    background-color: #4caf50;
-    color: #fff;
+.btn-add-to-basket {
+    background-color: #ffd6a8;
+    color: #1f2029;
     padding: 8px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
 }
 
-.btn-add-to-bucket:hover {
-    background-color: #45a049;
+.btn-add-to-basket:hover {
+    background-color: #1f2029;
+    color: #ffd6a8;
 }

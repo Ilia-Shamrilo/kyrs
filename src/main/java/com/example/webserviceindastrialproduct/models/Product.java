@@ -18,10 +18,17 @@ public class Product {
     private Long id;
     private String name;
     private String description;
+    @ElementCollection
+    @Cascade(org.hibernate.annotations.CascadeType.REMOVE)
+    private List<String> characteristics;
     private double price;
     @Enumerated(EnumType.STRING)
     private Category categories;
     @ElementCollection
     @Cascade(org.hibernate.annotations.CascadeType.REMOVE)
     private List<String> photos;
+    @ManyToMany
+    private List<User> users;
+    @OneToOne
+    private Order orders;
 }

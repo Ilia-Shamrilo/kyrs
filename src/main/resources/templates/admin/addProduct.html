@@ -4,26 +4,34 @@
     <meta charset="UTF-8">
     <title>Add Product</title>
     <link rel="stylesheet" type="text/css" media="all" href="../static/styles/addProduct.css" th:href="@{/styles/addProduct.css}">
+    <link rel="stylesheet" type="text/css" media="all" href="../static/styles/reg_auth.css" th:href="@{/styles/reg_auth.css}">
+    <link rel="stylesheet" type="text/css" media="all" href="../static/styles/home.css" th:href="@{/styles/home.css}">
 </head>
 <body>
-
-<form th:action="@{/add-product}" method="post" th:object="${product}" enctype="multipart/form-data">
-    <h2>Добавление товара</h2>
-
-    <!-- Добавьте поля для ввода данных о товаре -->
-    <label>Название: <input type="text" th:field="*{name}" required/></label><br/>
-    <label>Описание: <textarea th:field="*{description}" required></textarea></label><br/>
-    <label>Цена: <input type="number" th:field="*{price}" required/></label><br/>
-    <label>Фотки: <input type="file" name="images" accept="image/*" multiple></label>
-    <label>Категория:
-        <select th:field="*{categories}" required>
-            <option th:each="category : ${T(com.example.webserviceindastrialproduct.models.Category).values()}"
-                    th:value="${category}" th:text="${category}"></option>
-        </select>
-    </label><br/>
-    <!-- Другие поля товара, если необходимо -->
-    <button type="submit">Добавить</button>
-
-</form>
+<div class="top-bar">
+    <a class="top-left-link" th:href="@{/inpr}">Главная</a>
+    <form  th:action="@{/logout}" method="post">
+        <input class="btn-logout" type="submit" value="Выйти">
+    </form>
+</div>
+<div class="add-form">
+    <form th:action="@{/add-product}" method="post" th:object="${product}" enctype="multipart/form-data">
+        <h2>Добавление товара</h2>
+        <!-- Добавьте поля для ввода данных о товаре -->
+        <label>Название: <input class="add-input" type="text" th:field="*{name}" required/></label><br/>
+        <label>Описание: <textarea th:field="*{description}" required></textarea></label><br/>
+        <label>Характеристики: <textarea name="characteristics" required placeholder="Вводите через «,»"></textarea></label>
+        <label>Цена: <input class="add-input" type="number" th:field="*{price}" required/></label><br/>
+        <label>Фотки: <input class="add-input" type="file" name="images" accept="image/*" multiple></label>
+        <label>Категория:
+            <select th:field="*{categories}" required>
+                <option th:each="category : ${T(com.example.webserviceindastrialproduct.models.Category).values()}"
+                        th:value="${category}" th:text="${category}"></option>
+            </select>
+        </label><br/>
+        <!-- Другие поля товара, если необходимо -->
+        <button class="add-btn" type="submit">Добавить</button>
+    </form>
+</div>
 </body>
 </html>

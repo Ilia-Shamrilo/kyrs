@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>InnovateInProducts</title>
@@ -12,29 +12,101 @@
         <!-- Отображаем только если пользователь не авторизован -->
         <a class="top-right-link" th:if="${authentication.name == 'anonymousUser'}" th:href="@{/auth}">Авторизация</a>
         <a class="top-right-link2" th:if="${authentication.name == 'anonymousUser'}" th:href="@{/registr}">Регистрация</a>
-
         <!-- Отображаем только если пользователь авторизован -->
     <form th:if="${authentication.name != 'anonymousUser'}" th:action="@{/logout}" method="post">
         <input class="btn-logout" type="submit" value="Выйти">
+    </form>
+    <form th:if="${roles.contains('USER')}" th:action="@{/basket}" method="get">
+        <input class="btn-add-pr" type="submit" value="Корзина">
+    </form>
+    <form th:if="${roles.contains('USER')}" th:action="@{/profile}" method="get">
+        <input class="btn-profile" type="submit" value="Профиль">
     </form>
     <form th:if="${roles.contains('ADMIN')}" th:action="@{/add-product}" method="get">
         <input class="btn-add-pr" type="submit" value="Добавить продукт">
     </form>
 </div>
+
+<div class="find">
+    <form>
+        <select class="find-select" name="select" id="select" required>
+            <option value="default">Все</option>
+            <option th:each="category : ${T(com.example.webserviceindastrialproduct.models.Category).values()}"
+                    th:value="${category.name()}" th:text="${category}"></option>
+        </select>
+        <input name="nameProduct" id="nameProduct">
+        <button class="find-btn" type="button" onclick="filterList()">Искать</button>
+    </form>
+</div>
+
 <div class="product-container">
     <div th:each="product : ${products}">
-        <div class="product">
-            <img class="image-product" th:src="@{'/images/' + ${product.photos.get(0)}}" alt="Product Image">
-            <div class="product-details">
-                <h3 class="name-product" th:text="${product.name}"></h3>
-                <p class="description-product" th:text="${product.description}"></p>
-                <div class="price-and-button">
-                    <p class="price-product" th:text="${product.price}"></p>
-                    <button class="btn-add-to-bucket" type="button">Поместить в корзину</button>
+        <a class="product-link" th:href="@{'/product?productId=' + ${product.id}}">
+            <div class="product">
+                <img class="image-product" th:src="@{'/images/' + ${product.photos.get(0)}}" alt="Product Image">
+                <div class="product-details">
+                    <h3 class="name-product" th:text="${product.name}"></h3>
+                    <p class="description-product" th:text="${product.description}"></p>
+                    <div class="price-and-button">
+                        <p class="price-product" th:text="${product.price}+'р.'"></p>
+                        <form th:if="${not roles.contains('ADMIN')}" th:action="@{/add-to-basket}" method="post">
+                            <input type="hidden" name="productId" th:value="${product.id}">
+                            <button class="btn-add-to-basket" type="submit">Поместить в корзину</button>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
+        </a>
     </div>
 </div>
 </body>
+<script>
+    // Обновление sessionStorage при изменении значения сортировки
+    function updateSortOption() {
+        var select = document.getElementById('select');
+        var selectedOption = select.options[select.selectedIndex].value;
+        sessionStorage.setItem('selectedOption', selectedOption);
+    }
+
+    // Получение сохраненного значения сортировки при загрузке страницы
+    function getSavedSortOption() {
+        return sessionStorage.getItem('selectedOption');
+    }
+
+    // Задаем сохраненное значение при загрузке страницы
+    document.addEventListener('DOMContentLoaded', function () {
+        var savedOption = getSavedSortOption();
+        if (savedOption) {
+            var select = document.getElementById('select');
+            select.value = savedOption;
+        }
+    });
+
+    // Вызываем updateSortOption при изменении значения в селекте
+    document.getElementById('select').addEventListener('change', updateSortOption);
+
+    // Функция сортировки
+    function filterList() {
+        var selectedOption = getSavedSortOption();
+        var inputText = document.getElementById('nameProduct').value;
+
+        // Получаем текущий URL
+        var url = window.location.href;
+
+        // Ищем существующий параметр filterBy в URL
+        var filterByIndex = url.indexOf('?filterBy=');
+
+        // Если параметр filterBy уже существует, обрезаем его из URL
+        if (filterByIndex !== -1) {
+            url = url.substring(0, filterByIndex);
+        }
+
+        // Добавляем выбранное значение сортировки и текст из инпута в URL
+        url = url + "?filterBy=" + selectedOption + "&nameProduct=" + inputText;
+
+        // Перенаправляем на обновленный URL
+        window.location.href = url;
+    }
+</script>
+
 </html>

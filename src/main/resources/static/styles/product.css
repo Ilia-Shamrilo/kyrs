@@ -1,0 +1,17 @@
+.in-product-container {
+    max-width: 1200px;
+    height: 700px;
+    margin: 60px auto;
+}
+.image-in-product {
+    width: 400px;
+    height: 500px;
+    min-width: 250px;
+    min-height: 250px;
+    margin-right: 10px;
+}
+.image-center{
+    display: flex;
+    justify-content: center;
+    margin: auto;
+}

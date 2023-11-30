@@ -1,4 +1,4 @@
 -- INSERT INTO users (id, name, number, password, role)
--- VALUES (0, 'admin', '+375293118588', 'admin', 'ADMIN');
+-- VALUES (0, 'admin', '+375293118588', '$2a$10$U4LTxYyIkzeoLUsqf.NlmO24d0zprsri3arieLIzvHWCvoqx87oHK', 'ADMIN');
 --
 -- ALTER SEQUENCE user_seq RESTART WITH 1;

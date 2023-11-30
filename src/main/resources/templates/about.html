@@ -4,15 +4,24 @@
     <meta charset="UTF-8">
     <title>About Us</title>
     <link rel="stylesheet" type="text/css" media="all" href="../static/styles/reg_auth.css" th:href="@{/styles/reg_auth.css}">
+    <link rel="stylesheet" type="text/css" media="all" href="../static/styles/home.css" th:href="@{/styles/home.css}">
 </head>
 <body>
 
 <div class="top-bar">
     <a class="top-left-link" th:href="@{/inpr}">Главная</a>
+    <!-- Отображаем только если пользователь не авторизован -->
     <a class="top-right-link" th:if="${authentication.name == 'anonymousUser'}" th:href="@{/auth}">Авторизация</a>
     <a class="top-right-link2" th:if="${authentication.name == 'anonymousUser'}" th:href="@{/registr}">Регистрация</a>
-    <form class="top-right-link" th:if="${authentication.name != 'anonymousUser'}" th:action="@{/logout}" method="post">
-        <input type="submit" value="Logout">
+    <!-- Отображаем только если пользователь авторизован -->
+    <form th:if="${authentication.name != 'anonymousUser'}" th:action="@{/logout}" method="post">
+        <input class="btn-logout" type="submit" value="Выйти">
+    </form>
+    <form th:if="${roles.contains('USER')}" th:action="@{/basket}" method="post">
+        <input class="btn-add-pr" type="submit" value="Корзина">
+    </form>
+    <form th:if="${roles.contains('ADMIN')}" th:action="@{/add-product}" method="get">
+        <input class="btn-add-pr" type="submit" value="Добавить продукт">
     </form>
 </div>
 
