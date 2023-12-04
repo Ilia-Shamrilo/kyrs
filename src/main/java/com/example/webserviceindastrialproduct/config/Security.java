@@ -21,7 +21,7 @@ public class Security{
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests((request) -> request
                         .requestMatchers("/inpr/**", "/about/**","/images/**","/basket/**","/product/**").permitAll()
-                        .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/admin-panel/**","/add-product/**","/product-edit/**").hasAuthority("ADMIN")
                         .requestMatchers("/registr","/styles/**")
                         .permitAll().anyRequest().authenticated())
                 .formLogin((form) -> form

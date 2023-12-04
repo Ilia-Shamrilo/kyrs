@@ -27,8 +27,8 @@ public class Product {
     @ElementCollection
     @Cascade(org.hibernate.annotations.CascadeType.REMOVE)
     private List<String> photos;
-    @ManyToMany
+    @ManyToMany(mappedBy = "basketProduct")
     private List<User> users;
-    @OneToOne
+    @OneToOne(mappedBy = "product", cascade = CascadeType.REMOVE)
     private Order orders;
 }

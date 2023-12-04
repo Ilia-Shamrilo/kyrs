@@ -5,26 +5,41 @@
     <title>Title</title>
     <link rel="stylesheet" type="text/css" media="all" href="../static/styles/reg_auth.css" th:href="@{/styles/reg_auth.css}">
     <link rel="stylesheet" type="text/css" media="all" href="../static/styles/home.css" th:href="@{/styles/home.css}">
+    <link rel="stylesheet" type="text/css" media="all" href="../static/styles/profile.css" th:href="@{/styles/profile.css}">
 </head>
 <body>
-    <div>
-        <p th:text="${user.name}"></p>
-        <p th:text="${user.number}"></p>
-    </div>
-    <form>
-        <select class="find-select" name="select" id="select" required>
+<div class="top-bar">
+    <a class="top-left-link" th:href="@{/inpr}">Главная</a>
+
+    <form th:action="@{/logout}" method="post">
+        <input class="btn-logout" type="submit" value="Выйти">
+    </form>
+    <form th:action="@{/basket}" method="get">
+        <input class="btn-add-pr" type="submit" value="Корзина">
+    </form>
+</div>
+<div class="info">
+    <p>Ваше имя:</p>
+    <p th:text="${user.name}"></p>
+    <p>Ваш номер телефона:</p>
+    <p th:text="${user.number}"></p>
+</div>
+<p class="p-text">Ваши заказы:</p>
+
+    <form class="find-order">
+        <select class="find-order-select" name="select" id="select" required>
             <option value="default">Все</option>
             <option value="В ожидании оплаты">В ожидании оплаты</option>
             <option value="Успешно отправлен">Успешно отправлены</option>
             <option value="Отменен">Отменены</option>
-        </select><
+        </select>
         <button class="find-btn" type="button" onclick="filterList()">Искать</button>
     </form>
     <div th:each="order, itr : ${orders}">
         <div th:if="${order.getStatus().equals('В ожидании оплаты')}">
-            <p th:if="${itr.index == 0}"> Список неоплаченных заказов</p>
+            <p class="status-pay" th:if="${itr.index == 0}"> Список неоплаченных заказов:</p>
             <div>
-                <p th:text="${'Дата оформления: ' + order.getCreated().toLocalDate()}"></p>
+                <p class="date" th:text="${'Дата оформления: ' + order.getCreated().toLocalDate()}"></p>
                 <div class="product">
                     <img class="image-product" th:src="@{'/images/' + ${order.product.photos.get(0)}}" alt="Product Image">
                     <div class="product-details">
@@ -43,16 +58,16 @@
                         </div>
                     </div>
                 </div>
-                <p th:text="${'Количество продукта: ' + order.getAmountOfProduct()}"></p>
+                <p class="count-product" th:text="${'Количество продукта: ' + order.getAmountOfProduct()}"></p>
             </div>
         </div>
     </div>
 
     <div th:each="order, itr : ${orders}">
         <div th:if="${order.getStatus().equals('Успешно отправлен')}">
-            <p th:if="${itr.index == 0}"> Список оплаченных заказов</p>
+            <p class="status-pay" th:if="${itr.index == 0}">Список оплаченных заказов:</p>
             <div>
-                <p th:text="${'Дата оплаты: ' + order.getUpdate().toLocalDate()}"></p>
+                <p class="date" th:text="${'Дата оплаты: ' + order.getUpdate().toLocalDate()}"></p>
                 <div class="product">
                     <img class="image-product" th:src="@{'/images/' + ${order.product.photos.get(0)}}" alt="Product Image">
                     <div class="product-details">
@@ -63,16 +78,16 @@
                         </div>
                     </div>
                 </div>
-                <p th:text="${'Количество продукта: ' + order.getAmountOfProduct()}"></p>
+                <p class="count-product" th:text="${'Количество продукта: ' + order.getAmountOfProduct()}"></p>
             </div>
         </div>
     </div>
 
     <div th:each="order, itr : ${orders}">
         <div th:if="${order.getStatus().equals('Отменен')}">
-            <p th:if="${itr.index == 0}"> Список отмененных заказов</p>
+            <p class="status-pay" th:if="${itr.index == 0}"> Список отмененных заказов:</p>
             <div>
-                <p th:text="${'Дата оформления: ' + order.getCreated().toLocalDate()}"></p>
+                <p class="date" th:text="${'Дата оформления: ' + order.getCreated().toLocalDate()}"></p>
                 <div class="product">
                     <img class="image-product" th:src="@{'/images/' + ${order.product.photos.get(0)}}" alt="Product Image">
                     <div class="product-details">
@@ -91,7 +106,7 @@
                         </div>
                     </div>
                 </div>
-                <p th:text="${'Количество продукта: ' + order.getAmountOfProduct()}"></p>
+                <p class="count-product" th:text="${'Количество продукта: ' + order.getAmountOfProduct()}"></p>
             </div>
         </div>
     </div>

@@ -11,4 +11,5 @@ import java.util.List;
 @EnableJpaRepositories
 public interface ProductRepository extends JpaRepository<Product, Long> {
     List<Product> findAll();
+    void deleteById(Long id);
 }

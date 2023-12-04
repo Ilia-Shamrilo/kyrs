@@ -15,22 +15,36 @@
     </form>
 </div>
 <div class="add-form">
-    <form th:action="@{/add-product}" method="post" th:object="${product}" enctype="multipart/form-data">
-        <h2>Добавление товара</h2>
+    <form th:action="@{/product-edit}" method="post" th:object="${product}" enctype="multipart/form-data">
+        <h2>Редактирование товара</h2>
         <!-- Добавьте поля для ввода данных о товаре -->
         <label>Название: <input class="add-input" type="text" th:field="*{name}" required/></label><br/>
         <label>Описание: <textarea th:field="*{description}" required></textarea></label><br/>
-        <label>Характеристики: <textarea name="characteristics" required placeholder="Вводите через «,»"></textarea></label>
+        <label>Характеристики: <textarea th:text="${characteristics}" name="characteristics" required placeholder="Вводите через «,»"></textarea></label>
         <label>Цена: <input class="add-input" type="number" th:field="*{price}" required/></label><br/>
-        <label>Фотки: <input class="add-input" type="file" name="images" accept="image/*" multiple required></label>
+        <label>Добавить фото: <input class="add-input" type="file" name="images" accept="image/*" multiple></label>
         <label>Категория:
             <select th:field="*{categories}" required>
                 <option th:each="category : ${T(com.example.webserviceindastrialproduct.models.Category).values()}"
                         th:value="${category}" th:text="${category}"></option>
             </select>
         </label><br/>
-        <button class="add-btn" type="submit">Добавить</button>
+        <input type="hidden" name="id" th:value="${product.id}">
+        <!-- Другие поля товара, если необходимо -->
+        <button class="add-btn" type="submit">Сохранить</button>
+        <p>Текущие фото:</p>
     </form>
+        <div th:each="photo : ${product.photos}">
+            <img th:src="@{'/images/' + ${photo}}" width="150" height="150">
+            <form th:action="@{/delete-photo}" method="post">
+                <input type="hidden" name="productId" th:value="${product.id}">
+                <input type="hidden" name="photo" th:value="${photo}">
+                <div th:if="${errorOfLastPhoto}" class="alert" role="alert">
+                    <p th:text="${errorOfLastPhoto}"></p>
+                </div>
+                <button type="submit">Удалить</button>
+            </form>
+        </div>
 </div>
 </body>
 </html>

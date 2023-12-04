@@ -6,6 +6,17 @@
     <link rel="stylesheet" type="text/css" media="all" href="../static/styles/reg_auth.css" th:href="@{/styles/reg_auth.css}">
     <link rel="stylesheet" type="text/css" media="all" href="../static/styles/home.css" th:href="@{/styles/home.css}">
     <link rel="stylesheet" type="text/css" media="all" href="../static/styles/product.css" th:href="@{/styles/product.css}">
+    <!-- Подключение jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <!-- Подключение Slick Carousel CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.css"/>
+
+    <!-- Подключение Slick Carousel theme CSS, если нужно -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.css"/>
+
+    <!-- Подключение Slick Carousel JS -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
 
 
 </head>
@@ -30,8 +41,10 @@
     </form>
 </div>
 <div class="in-product-container">
-    <div class="image-center">
-        <img class="image-in-product" th:src="@{'/images/' + ${product.photos.get(0)}}" alt="Product Image">
+    <div class="slider">
+        <div class="image-center" th:each="photo : ${product.photos}">
+            <img class="image-in-product" th:src="@{'/images/' + ${photo}}" alt="Product Image">
+        </div>
     </div>
     <div class="product">
             <div class="product-details">
@@ -54,4 +67,15 @@
     </div>
 </div>
 </body>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('.slider').slick({
+            // Параметры настройки слайдера, если нужно
+            infinite: true,
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            // Другие параметры...
+        });
+    });
+</script>
 </html>

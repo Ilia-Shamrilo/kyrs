@@ -22,8 +22,8 @@ public class User {
     private String password;
     @Enumerated(EnumType.STRING)
     private Role role;
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<Product> basketProduct;
-    @OneToMany
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     private List<Order> orders;
 }

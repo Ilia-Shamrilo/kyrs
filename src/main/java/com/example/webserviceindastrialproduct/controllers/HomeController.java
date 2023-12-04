@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -66,7 +65,7 @@ public class HomeController {
 
         if (!nameProduct.equals("default")) {
             // Используем итератор для безопасного удаления элементов
-            filterList.removeIf(product -> !product.getName().equals(nameProduct));
+            filterList.removeIf(product -> !product.getName().contains(nameProduct));
         }
 
         model.addAttribute("products", filterList);
@@ -164,5 +163,33 @@ public class HomeController {
             model.addAttribute("orders", filterList);
         }
         return "profile";
+    }
+
+    @PostMapping("/pay-order")
+    public String payOrder(@RequestParam("orderIdToPay") Long id){
+        Order order = orderService.findById(id);
+        order.setStatus("Успешно отправлен");
+        orderService.createOrder(order);
+        return "redirect:/profile?";
+    }
+    @PostMapping("/cancel-order")
+    public String cancelOrder(@RequestParam("orderIdToCancel") Long id){
+        Order order = orderService.findById(id);
+        order.setStatus("Отменен");
+        orderService.createOrder(order);
+        return "redirect:/profile?";
+    }
+    @PostMapping("/delete-order")
+    public String deleteOrder(@RequestParam("orderIdToDelete") Long id){
+        Order order = orderService.findById(id);
+        orderService.deleteOrder(order);
+        return "redirect:/profile?";
+    }
+    @PostMapping("/restore-order")
+    public String restoreOrder(@RequestParam("orderIdToRestore") Long id){
+        Order order = orderService.findById(id);
+        order.setStatus("В ожидании оплаты");
+        orderService.createOrder(order);
+        return "redirect:/profile?";
     }
 }

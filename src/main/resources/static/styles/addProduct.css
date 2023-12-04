@@ -23,6 +23,7 @@ label {
 .add-input,
 textarea,
 select {
+    color: #000000;
     background-color: #e0e0e0;
     width: 100%;
     padding: 8px;

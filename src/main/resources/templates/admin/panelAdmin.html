@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" media="all" href="../static/styles/reg_auth.css" th:href="@{/styles/reg_auth.css}">
+    <link rel="stylesheet" type="text/css" media="all" href="../static/styles/home.css" th:href="@{/styles/home.css}">
+</head>
+<body>
+<div class="top-bar">
+    <a class="top-left-link" th:href="@{/inpr}">Главная</a>
+    <form th:action="@{/logout}" method="post">
+        <input class="btn-logout" type="submit" value="Выйти">
+    </form>
+    <form th:action="@{/add-product}" method="get">
+        <input class="btn-add-pr" type="submit" value="Добавить продукт">
+    </form>
+</div>
+<p class="title-panel">Список всех продуктов:</p>
+<div class="product-container">
+    <div th:each="product : ${products}">
+        <a class="product-link" th:href="@{'/product?productId=' + ${product.id}}">
+            <div class="product">
+                <img class="image-product" th:src="@{'/images/' + ${product.photos.get(0)}}" alt="Product Image">
+                <div class="product-details">
+                    <h3 class="name-product" th:text="${product.name}"></h3>
+                    <p class="description-product" th:text="${product.description}"></p>
+                    <div class="price-and-button">
+                        <p class="price-product" th:text="${product.price}+'р.'"></p>
+                        <form th:action="@{/product-edit}" method="get">
+                            <input type="hidden" name="productIdToEdit" th:value="${product.id}">
+                            <button class="btn-add-to-basket" type="submit">Редактировать</button>
+                        </form>
+                        <form th:action="@{/delete-product}" method="post">
+                            <input type="hidden" name="productIdToDelete" th:value="${product.id}">
+                            <button class="btn-add-to-basket" type="submit">Удалить объявление</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
+<p class="title-panel">Список всех пользователей:</p>
+<div class="user-container">
+    <div th:each="user : ${users}">
+        <div class="product-link" th:href="@{'/user?userId=' + ${user.id}}">
+            <div class="product">
+                <div class="product-details">
+                    <h3 class="name-product" th:text="${user.name}"></h3>
+                    <p class="description-product" th:text="${user.number}"></p>
+                    <form th:if="${user.getRole().name() == 'USER'}" th:action="@{/delete-user}" method="post">
+                        <input type="hidden" name="userIdToDelete" th:value="${user.id}">
+                        <button class="btn-add-to-basket" type="submit">Удалить пользователя</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

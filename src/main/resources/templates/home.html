@@ -22,6 +22,9 @@
     <form th:if="${roles.contains('USER')}" th:action="@{/profile}" method="get">
         <input class="btn-profile" type="submit" value="Профиль">
     </form>
+    <form th:if="${roles.contains('ADMIN')}" th:action="@{/admin-panel}" method="get">
+        <input class="btn-admin-panel" type="submit" value="Панель администратора">
+    </form>
     <form th:if="${roles.contains('ADMIN')}" th:action="@{/add-product}" method="get">
         <input class="btn-add-pr" type="submit" value="Добавить продукт">
     </form>
@@ -34,7 +37,7 @@
             <option th:each="category : ${T(com.example.webserviceindastrialproduct.models.Category).values()}"
                     th:value="${category.name()}" th:text="${category}"></option>
         </select>
-        <input name="nameProduct" id="nameProduct">
+        <input class="find-name" name="nameProduct" id="nameProduct" placeholder="Введите название">
         <button class="find-btn" type="button" onclick="filterList()">Искать</button>
     </form>
 </div>

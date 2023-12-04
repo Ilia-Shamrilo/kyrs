@@ -9,31 +9,36 @@
 <body>
 <div class="top-bar">
     <a class="top-left-link" th:href="@{/inpr}">Главная</a>
+    <form th:action="@{/profile}" method="get">
+        <input class="btn-add-pr" type="submit" value="Профиль">
+    </form>
     <form  th:action="@{/logout}" method="post">
         <input class="btn-logout" type="submit" value="Выйти">
     </form>
 
 </div>
 <div th:if="${products.isEmpty()}">
-    <p>Корзина пуста</p>
+    <p class="empty">Ваша корзина пуста</p>
 </div>
 <div class="product-container">
     <div th:each="product : ${products}">
-        <a th:href="@{'/product?productId=' + ${product.id}}">
+        <a class="link-product" th:href="@{'/product?productId=' + ${product.id}}">
             <div class="product">
                 <img class="image-product" th:src="@{'/images/' + ${product.photos.get(0)}}" alt="Product Image">
                 <div class="product-details">
                     <h3 class="name-product" th:text="${product.name}"></h3>
                     <p class="description-product" th:text="${product.description}"></p>
                     <p class="price-product" th:text="${product.price}+'р.'"></p>
+                    <div class="price-and-button">
+
                     <form th:action="@{/delete-from-basket}" method="post">
                         <input type="hidden" name="productIdToDeleteFromBasket" th:value="${product.id}">
-                        <button class="btn-add-to-basket" type="submit">Удалить</button>
+                        <button class="btn-add-to-basket" type="submit">Удалить из корзины</button>
                     </form>
                     <form th:action="@{/create-order}" method="post">
                         <input type="hidden" name="productIdToCreateOrder" th:value="${product.id}">
                         <button class="btn-add-to-basket" type="submit">Оформить заказ</button>
-                    </form>
+                    </form></div>
                 </div>
             </div>
         </a>

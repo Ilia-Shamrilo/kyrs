@@ -34,6 +34,24 @@
     color: #1f2029;
     border-radius: 10px;
 }
+.btn-admin-panel{
+    font-size: 20px;
+    position: absolute;
+    background-color: #ffd6a8;
+    top: 15px;
+    right: 340px;
+    display: block;
+    border: 0;
+    cursor: pointer;
+    color: #1f2029;
+    border-radius: 10px;
+}
+.empty{
+    color: #ffd6a8;
+    font-size: 50px;
+    text-align: center;
+    padding-top: 150px;
+}
 .find{
     margin-left: auto;
     margin-right: auto;
@@ -60,11 +78,22 @@
     border-radius: 15px;
     cursor: pointer;
 }
-
+.find-name{
+    width: 300px;
+    height: 40px;
+    border: none;
+    border-radius: 20px;
+    outline: none;
+}
 .find-btn:hover {
     background-color: #e8c195;
 }
 .product-container {
+    max-width: 900px;
+    margin: 40px auto;
+    outline: none;
+}
+.user-container {
     max-width: 900px;
     margin: 40px auto;
 }
@@ -137,4 +166,13 @@
 .btn-add-to-basket:hover {
     background-color: #1f2029;
     color: #ffd6a8;
+}
+.title-panel{
+    font-size: 25px;
+    color: #e0e0e0;
+    text-align: center;
+    padding-top: 15px;
+}
+.link-product{
+    text-decoration: none;
 }

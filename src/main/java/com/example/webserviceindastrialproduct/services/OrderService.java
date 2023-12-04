@@ -4,6 +4,7 @@ import com.example.webserviceindastrialproduct.models.Order;
 import com.example.webserviceindastrialproduct.models.Product;
 import com.example.webserviceindastrialproduct.models.User;
 import com.example.webserviceindastrialproduct.repositories.OrderRepository;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -23,5 +24,12 @@ public class OrderService {
     }
     public List<Order> findByUser(User user){
         return orderRepository.findByUser(user);
+    }
+    public Order findById(Long id){
+        return orderRepository.findById(id).get();
+    }
+    @Transactional
+    public void deleteOrder(Order order){
+        orderRepository.delete(order);
     }
 }
